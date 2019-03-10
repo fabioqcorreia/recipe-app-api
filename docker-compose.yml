@@ -4,6 +4,8 @@ services:
   app:
     build:
       context: .
+    networks:
+      - apps
     ports:
       - "8000:8000"
     volumes:
@@ -22,8 +24,13 @@ services:
   
   db:
     image: postgres:10-alpine
+    networks:
+      - apps
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecretpassword
+      
+networks:
+  apps:
       
